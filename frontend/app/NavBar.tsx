@@ -14,8 +14,14 @@ const NavBar = () => {
     {name: 'Home', path: '/'},
     {name: 'Search', path: '/search'},
     {name: 'Reviews', path: '/reviews'},
-    {name: 'Profile', path: '/profile'}
+    {name: 'Profile', path: '/profile'},
+    {name: 'Login', path: '/login'},
+    {name: 'Signup', path: '/signup'},
+    {name: 'ForgotPassword', path: '/forgotpassword'}
   ]
+  // Filter the links to just the ones that can be accessed via the nav bar
+  // Does not include login, signup, or forgot password pages
+  //const accessibleLinks = links.filter(())
   return(
     <nav className='flex space-x-6 border-b mb-5 px-5 h-14 items-center'>
       <Link href="/"><PiGameControllerFill /></Link>

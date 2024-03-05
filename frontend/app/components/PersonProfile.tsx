@@ -5,10 +5,10 @@ const PersonProfile = ({name, email}) => {
     return (
         <div>
             <Text as="div" size = "4" >
-                {name}
+                User Name: {name}
             </Text>
             <Text as="div" size = "2" >
-                {email}
+                Email: {email}
             </Text>
         </div>
     )
