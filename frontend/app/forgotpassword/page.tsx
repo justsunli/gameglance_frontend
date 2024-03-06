@@ -10,14 +10,18 @@ const Forgotpassword: FC = () => {
     const avatarStyle: React.CSSProperties = { backgroundColor: 'red' };
     const buttonStyle: React.CSSProperties = { margin: '8px 0' };
 
+    const CheckEmail = async() => {
+        const email = String(document.getElementById('Email'));
+    }
+
     return (
         <Grid>
             <Paper elevation={10} style={paperStyle}>
                 <Grid alignItems="center" justifyContent='center'>
                     <Avatar style={avatarStyle}><VideogameAssetIcon /></Avatar>
                     <h2>Recover Password</h2>
-                    <TextField label='Email' placeholder='Enter an email address' fullWidth required />
-                    <Button type="submit" color="primary" variant="contained" style={buttonStyle} fullWidth>
+                    <TextField id='Email' placeholder='Enter an email address' fullWidth required />
+                    <Button onClick = {CheckEmail} type="submit" color="primary" variant="contained" style={buttonStyle} fullWidth>
                         Send to Email
                     </Button>
                     <Typography>

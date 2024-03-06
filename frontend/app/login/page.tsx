@@ -9,8 +9,11 @@ import { Button } from '@material-ui/core';
 import { Typography} from '@material-ui/core';
 import Link from 'next/link';
 import axios from 'axios';
+import { error } from 'console';
 
 interface LoginProps {}
+
+class IncorrectPasswordError extends SyntaxError {}
 
 const Login: FC<LoginProps> = () => {
 
@@ -18,16 +21,28 @@ const Login: FC<LoginProps> = () => {
     const avatarStyle: React.CSSProperties = {backgroundColor: 'red'}
     const buttonStyle: React.CSSProperties = {margin: '8px 0'}
     
-        /* const Authenticate = async() => {
+        const Authenticate = async() => {
+            const email = String(document.getElementById('Email'));
+            const inputPassword = String(document.getElementById('Password'));
             try{
                 // See if the given name exists in the backend database
                 const response = await axios.get('http://localhost:3001/getuserprofiles');
-                const profile = response.data[]
-
-            } catch(error) {
-                console.error('There was an error authenticating the user: ', error);
+                const profile = response.data[email];
+                if(profile.password != inputPassword){
+                    throw IncorrectPasswordError;
+                }
+                //FIXME: Redirect user to home page if login is successful
+            } 
+            catch(error) {
+                if(error instanceof IncorrectPasswordError) {
+                    console.error("The inputted password is incorrect.");
+                }
+                else {
+                    // The authentication could not find a profile matching the given email
+                console.error('There is no user with this given email: ', email);
+                }
             }
-        } */
+        }
 
     // @ts-ignore
     return (
@@ -49,7 +64,7 @@ const Login: FC<LoginProps> = () => {
                         }
                         label = "Remember me"
                     />
-                    <Button onClick = {() => "Authenticate()"} type="submit" color = "primary" variant = "contained" style = {buttonStyle} fullWidth>
+                    <Button onClick = {Authenticate} type="submit" color = "primary" variant = "contained" style = {buttonStyle} fullWidth>
                         Login
                     </Button>
                     <Typography>

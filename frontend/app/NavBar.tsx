@@ -21,12 +21,12 @@ const NavBar = () => {
   ]
   // Filter the links to just the ones that can be accessed via the nav bar
   // Does not include login, signup, or forgot password pages
-  //const accessibleLinks = links.filter(())
+  const accessibleLinks = links.filter((link) => link.name != 'Login' && link.name != 'Signup' && link.name != 'ForgotPassword')
   return(
     <nav className='flex space-x-6 border-b mb-5 px-5 h-14 items-center'>
       <Link href="/"><PiGameControllerFill /></Link>
       <ul className='flex space-x-6'>
-        {links.map(link => 
+        {accessibleLinks.map(link => 
         <Link key={link.path} 
         className={classnames({
           'text-zinc-900': currentPath === link.path,
