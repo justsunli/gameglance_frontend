@@ -19,7 +19,8 @@ const Signup: FC = () => {
         const email = String(document.getElementById('Email'));
         const password = String(document.getElementById('password'));
         try{
-            const succCode = await fetch('http://localhost:3001/getuserprofiles', {
+            //event?.preventDefault();
+            const succCode = await axios.post('http://localhost:3000/addUser', {
                 method: "POST",
                 data: JSON.stringify({
                     name: name,

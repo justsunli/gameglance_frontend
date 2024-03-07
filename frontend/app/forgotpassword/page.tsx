@@ -4,6 +4,8 @@ import React, { FC } from 'react';
 import { Grid, Paper, TextField, Avatar, Button, Typography} from '@material-ui/core';
 import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import Link from 'next/link';
+import { error } from 'console';
+import axios from 'axios';
 
 const Forgotpassword: FC = () => {
     const paperStyle: React.CSSProperties = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
@@ -12,6 +14,14 @@ const Forgotpassword: FC = () => {
 
     const CheckEmail = async() => {
         const email = String(document.getElementById('Email'));
+        try{
+            const response = await axios.get('http://localhost:3001/getuserprofiles');
+            const profile = response.data[email];
+            //FIXME: Send email here
+        }catch(error){
+            // The authentication could not find a profile matching the given email
+            console.error('There is no user with this given email: ', email);
+        }
     }
 
     return (
