@@ -2,7 +2,7 @@
 
 import { FormControlLabel, Grid, Paper, TextField } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import { CheckBox } from '@material-ui/icons';
 import { Button } from '@material-ui/core';
@@ -10,6 +10,10 @@ import { Typography} from '@material-ui/core';
 import Link from 'next/link';
 import axios from 'axios';
 import { error } from 'console';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import {auth} from '../components/firebase';
+import { redirect } from 'react-router-dom';
+import { FirebaseError } from 'firebase/app';
 
 interface LoginProps {}
 
@@ -20,29 +24,37 @@ const Login: FC<LoginProps> = () => {
     const paperStyle: React.CSSProperties = {padding: 20, height: '70vh', width: 280, margin: "20px auto"}
     const avatarStyle: React.CSSProperties = {backgroundColor: 'red'}
     const buttonStyle: React.CSSProperties = {margin: '8px 0'}
+
+    // the email
+    const[email, setEmail] = useState('');
+    // the password
+    const[password, setPassword] = useState('');
+
+    // whether an error occurred
+    const [errorHandler, setErrorHandler] = useState({
+        isError: false,
+        errorMessage: "",
+    })
     
-        const Authenticate = async() => {
-            const email = String(document.getElementById('Email'));
-            const inputPassword = String(document.getElementById('Password'));
-            try{
-                // See if the given name exists in the backend database
-                const response = await axios.get('http://localhost:3001/getuserprofiles');
-                const profile = response.data[email];
-                if(profile.password != inputPassword){
-                    throw IncorrectPasswordError;
-                }
-                //FIXME: Redirect user to home page if login is successful
-            } 
-            catch(error) {
-                if(error instanceof IncorrectPasswordError) {
-                    console.error("The inputted password is incorrect.");
-                }
-                else {
-                    // The authentication could not find a profile matching the given email
-                console.error('There is no user with this given email: ', email);
-                }
-            }
+    const AuthenticateUser = async(e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+           
+        try{
+            setErrorHandler({isError: false, errorMessage: ""});
+            // See if the given name exists in the backend database
+            const loginCred = await signInWithEmailAndPassword(
+                auth, email, password,
+            );
+             //FIXME: Redirect user to home page if login is successful
+            redirect("/");
+        } catch(error: unknown){
+            const err = error as FirebaseError;
+            setErrorHandler({
+                isError: true,
+                errorMessage: "Email or password is incorrect."
+            })
         }
+    }
 
     // @ts-ignore
     return (
@@ -53,8 +65,11 @@ const Login: FC<LoginProps> = () => {
                         <VideogameAssetIcon/>
                     </Avatar>
                     <h2>Login</h2>
-                    <TextField id = 'Email' placeholder='Enter an email address' fullWidth required/>
-                    <TextField id = 'Password' placeholder='Enter a password' type='password' fullWidth required/>
+                    <form onSubmit = {AuthenticateUser}>
+                        <input id = "email" placeholder='Enter your email' onChange = {e => setEmail(e.target.value)} type = "email" />
+                        <input id = "password" placeholder='Enter your password' onChange = {e => setPassword(e.target.value)} type = "password" />
+                        <button type="submit" color="primary" style={buttonStyle}>Login</button>
+                    </form>
                     <FormControlLabel
                         control = {
                             <CheckBox
@@ -64,9 +79,6 @@ const Login: FC<LoginProps> = () => {
                         }
                         label = "Remember me"
                     />
-                    <Button onClick = {Authenticate} type="submit" color = "primary" variant = "contained" style = {buttonStyle} fullWidth>
-                        Login
-                    </Button>
                     <Typography>
                         Forgot password?
                     </Typography>
@@ -76,6 +88,9 @@ const Login: FC<LoginProps> = () => {
                         New to GameGlance?
                     </Typography>
                     <Link href="/signup">Sign up here!</Link>
+                    {errorHandler.isError ?(
+                        <div>{errorHandler.errorMessage}</div>
+                    ): null}
                 </Grid>
             </Paper>
         </Grid>

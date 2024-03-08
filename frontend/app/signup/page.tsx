@@ -8,7 +8,7 @@ import {redirect} from 'react-router-dom';
 import axios from 'axios';
 import {auth} from '../components/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { FirebaseAppSettings, FirebaseError } from 'firebase/app';
+import { FirebaseError } from 'firebase/app';
 
 
 const Signup: FC = () => {
@@ -19,7 +19,7 @@ const Signup: FC = () => {
     // Error types
     const ERRORS = {
         "auth/email-already-in-use": "Sorry, this email has already been taken.",
-        "auth/weak-password": "Sorry, your password is a bit too weak. Ideally, it needs as least six characters.",
+        "auth/weak-password": "Sorry, your password is a bit too weak. Ideally, it needs at least six characters.",
     };
     // the name
     const[name, setName] = useState('');
@@ -63,7 +63,7 @@ const Signup: FC = () => {
             const err = error as FirebaseError;
             setErrorHandler({
                 isError: true,
-                errorMessage: err.code,
+                errorMessage: ERRORS[err.code as keyof typeof ERRORS],
             })
         }
     }
