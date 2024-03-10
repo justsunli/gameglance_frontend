@@ -4,44 +4,67 @@ import React, {useState, useEffect} from 'react';
 import { Card, Inset, Text, Strong, Box, Flex, Avatar, Badge } from '@radix-ui/themes';
 import axios from 'axios';
 
-function ReviewCard({gameName}){
-  const [reviews, setReviews] = useState(null);
+interface Review {
+  id: number;
+  user_id: number;
+  review: string;
+
+}
+
+interface UserReview{
+  username: string;
+}
+
+
+const ReviewCard = ({ game_id }: { game_id: number }) => {
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [userReviews, setUserReviews] = useState<UserReview[]>([]);
 
   useEffect(() => {
     const fetchGameReviews = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/getgamereviews');
-        const gameReviews = response.data[gameName];
+        const response = await axios.get(`${process.env.BACKEND_URL}/getgamereviews/${game_id}`);
+        const gameReviews: Review[] = response.data;
         setReviews(gameReviews);
+
+        // query for username using user_id from each review
+        const userReviewsPromises = gameReviews.map(review =>
+          axios.get(`${process.env.BACKEND_URL}/review/user/${review.user_id}`)
+        );
+        const userReviewsResponses = await Promise.all(userReviewsPromises);
+        const userReviewsData: UserReview[] = userReviewsResponses.map(response => response.data);
+        setUserReviews(userReviewsData);
       } catch (error) {
-        console.error('Error fetching game reviews: ', error);
+        // Handle error
       }
     };
-  
-    fetchGameReviews();
-  }, [gameName]);
 
-  console.log('Game reviews:', reviews); 
+    fetchGameReviews();
+  }, [game_id]);
+
   if (!reviews) {
     return <div>Loading...</div>;
   }
   return (
     <div style={{ display: 'grid', gap:'20px' }}>
-      {reviews.map(review => (
-
-        <div key={review.id} >
-          <Card size="2">
-            <Box>
-              <Text as="div" size="2" weight="bold">
-                {review.userName}
-              </Text>
-              <Text as="div" size="2" color="gray">
-                {review.description} 
-              </Text>
-            </Box>
-          </Card>
-        </div>
-      ))}
+      {reviews.map((review, index) => {
+          const userReview = userReviews[index];
+          return(
+            <div key={index}>
+            <Card size="2">
+              <Box>
+                <Text as="div" size="2" weight="bold">
+                  {userReview.username}
+                </Text>
+                <Text as="div" size="2" color="gray">
+                  {review.review} 
+                </Text>
+              </Box>
+            </Card>
+          </div>
+  
+          );
+      })}
     </div>
 
   )

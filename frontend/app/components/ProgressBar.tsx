@@ -39,7 +39,7 @@ const ProgressNumber = styled.span`
 //   }
 // };
 
-const getColor = (value) => {
+const getColor = (value: number) => {
   const percent = value / 100;
   const highColor = Math.floor(255 * Math.max(0, Math.min(2 * percent, 1))).toString(16).padStart(2, '0');
   const lowColor = Math.floor(255 * Math.max(0, Math.min(2 - 2 * percent, 1))).toString(16).padStart(2, '0');
@@ -48,22 +48,27 @@ const getColor = (value) => {
   return barColor;
 };
 
+interface ProgressBarProps {
+  initialValue: number;
+  finalValue: number;
 
-const ProgressBar = ({ initialValue, finalValue }) => {
-  const [progress, setProgress] = useState(initialValue);
-  const color = getColor(finalValue);
+}
+
+const ProgressBar = (props: ProgressBarProps) => {
+  const [progress, setProgress] = useState(props.initialValue);
+  const color = getColor(props.finalValue);
 
   useEffect(() => {
-    const timer = setTimeout(() => setProgress(finalValue), 500);
+    const timer = setTimeout(() => setProgress(props.finalValue), 500);
     return () => clearTimeout(timer);
-  }, [finalValue]);
+  }, [props.finalValue]);
 
   return (
     <ProgressContainer>
       <ProgressRoot value={progress}>
         <ProgressIndicator color={color} style={{ transform: `translateX(-${100 - progress}%)` }} />
       </ProgressRoot>
-      <ProgressNumber>{`${finalValue}%`}</ProgressNumber>
+      <ProgressNumber>{`${props.finalValue}%`}</ProgressNumber>
     </ProgressContainer>
   );
 };

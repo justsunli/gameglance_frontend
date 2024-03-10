@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `Review` ADD COLUMN `rating` DOUBLE NOT NULL DEFAULT 0;
