@@ -6,76 +6,70 @@ import PersonProfile from "../components/PersonProfile";
 import ReviewCard from "../components/ReviewCard";
 import axios from "axios";
 
-const ProfilePage = ({user_id}) => {
+const ProfilePage = () => {
     // Display the user's information, along with their reviews
 
-    const[profile, setProfile] = useState(null);
-    const[reviewList, setReviewsList] = useState(null);
-    //const [gotProfile, setGotProfile] = useState(false);
-
-    /* const [errorHandler, setErrorHandler] = useState({
-        isError: false,
-        errorMessage: "",
-    }) */
+    const[profile, setProfile] = useState('');
+    const[reviewList, setReviewsList] = useState([]);
 
     const getUserProfile = async () => {
-        const url = 'http://localhost:8080/user/14';
-        //try{
-            /* useEffect(() => {
-                setErrorHandler({isError: false, errorMessage: ""});
-            }, []); */
-                axios({
+        //const url = 'http://localhost:8080/user/' + user_id;
+        const url = 'http://localhost:8080/user/13';
+            //useEffect(() => {
+            try {
+                const profileResponse = await axios({
                     method: 'GET',
                     url: url,
-                }).then(profileResponse => {
-                    useEffect(() => {
-                        setProfile(profileResponse.data);
-                    }, []);
-                })   
-                //setGotProfile(true);
-        //}catch(error: unknown){
-          //  console.log("Error: ", error);
-        //}
+                    //responseType: 'text'
+                });
+                //console.log("Data: ", profileResponse.data);
+                setProfile(profileResponse.data);
+                //return profileResponse.data;
+            }
+            catch(error) {
+                console.log("Error: Failed to get profile.", error.message);
+            }
+    }
 
-        /* try {
-            const reviewsResponse = await axios.get('http://localhost:3000/user/:user_id');
-            const userReviews = reviewsResponse.data[user_id];
-            setReviewsList(userReviews);
+    const getReviews = async () => {
+        const reviewURL = 'http://localhost:8080/review/user/14';
+        try {
+        const reviewResponse = await axios({
+            method: 'GET',
+            url: reviewURL,
+            //responseType: 'text'
+        });
+            console.log("reviews: ", reviewResponse.data);
+            setReviewsList(reviewResponse.data);
+        }catch(error){
+            console.log("Error: Failed to get reviews.", error.message);
         }
-        catch(error){
-            console.log("There was a problem getting the user reviews.");
-        } */
     }
     getUserProfile();
+    getReviews();
+    //console.log("Data: ", profile);
 
     if(!profile){
-        /* {errorHandler.isError ?(
-            <div>{errorHandler.errorMessage}</div>
-        ): null}  */
-        return <div>Loading profile...</div>
+       return <div>Loading profile...</div>
     }
-
-    /* if(!reviewList){
-        return <div>Loading reviews...</div>
-    } */
+    //if(!reviewList){
+    //    return <div>Loading reviews...</div>
+    //}
+    //console.log("data: ", profile);
     return(
-        //<Grid>
-          //  <PersonProfile name = "John Doe" email = "johndoe@someemail.com"/>
-            //<ReviewCard gameName={"Minecraft"}/>
-        //</Grid>
         <div>
             <div style={{ display: 'grid', gap:'20px' }}>
                 <div>
-                    <Text as="div" size="2" weight="bold">
-                        {profile.username};
+                    <Text as="div" size="4" weight="bold">
+                        {profile.username}
                     </Text>
                     <Text as="div" size="2" weight="bold">
-                        {profile.email};
+                        {profile.email}
                     </Text>
                 </div>
             </div>
             <div style={{ display: 'grid', gap:'20px' }}>
-            {/* {reviewList.map(review => (  
+            {reviewList.map(review => (  
             <div>
                 <Card size="2">
                     <Box>
@@ -91,7 +85,7 @@ const ProfilePage = ({user_id}) => {
                     </Box>
                 </Card>
           </div>
-            ))} */}
+            ))}
         </div>
       </div>
     )
