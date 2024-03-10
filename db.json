@@ -1,0 +1,83 @@
+{
+  "getgamedetails": [
+    {
+      "name": "The Witcher 3: Wild Hunt",
+      "image_link":"https://media.rawg.io/media/screenshots/67d/67d0e74fd74fd2ea9b847856fb388736.jpg",
+      "description":"The year is 2021, and Genoq has become a leading corporation in bio-medical research. However the tower, some 90 stories high, is not all that it seems. Somewhere within the tower, highly illegal bio-weapons research has been conducted in secret. June 26th, disaster strikes and the lethal organic weapons have escaped and threaten not only the staff members stranded in the tower, but the world itself. You arrive on the 80th floor with an urgent package addressed to Derrida, the lead scientist at Genoq working on the bio-weapons research. Set back from your goal, you must climb the tower, assisting those in need or focusing solely on your task at hand, and stopping the virus from escaping the tower and threatening all life on the planet. Will you help the stranded survivors or hinder them? Can you deliver the package to Derrida in time? Can you prevent the impending catastrophe and escape with your life? Key Features New high res graphics New music by Mark 'TDK' Knight New control menu Can save at any point in the game Leaderboards Achievements Same great gameplay",
+      "creator": "CD Projekt Red",
+      "platform": "PC, PS4, Xbox One, Switch",
+      "publisher": "CD Projekt",
+      "genre": "Action RPG"
+    },
+    {
+      "name": "Minecraft",
+      "image_link":"https://media.rawg.io/media/screenshots/67d/67d0e74fd74fd2ea9b847856fb388736.jpg",
+      "description":"Extreme Exorcism is a paranormal platformer where every move you make comes back to haunt you. Take on the role of Mae Barrons; an Extreme Exorcist with extreme measures. Her supernatural skills are called upon when everything and everyone else has failed to rid a haunted house of its ghostly presence. Conventional methods won’t cut it with these ghosts. Instead, Mae comes armed with a deadly arsenal of ghost-busting weapons, from rocket launchers to razor sharp boomerangs. But these aren’t your average poltergeists. At the end of each round, a ghost appears and mimics your every move from the round before. The longer you survive the more extreme the game becomes. Engage in non-stop ghost annihilation in 10 eerie areas of the haunted house – each room presenting its own hellish hazard. Brave the winds on the balcony and the fire in the kitchen, surviving for as long as you can. With a devilish local multiplayer – you can play co-op or deathmatch modes with up to 3 of your friends, and with 50 unique challenges even the most daring Extreme Exorcist will be put to the test.",
+      "creator": "Mojang Studios",
+      "platform": "PC, PS4, Xbox One, Switch, Mobile",
+      "publisher": "Mojang Studios",
+      "genre": "Sandbox, Survival"
+    },
+    {
+      "name": "Legend of Zelda: Breath of the Wild",
+      "image_link":"https://media.rawg.io/media/screenshots/67d/67d0e74fd74fd2ea9b847856fb388736.jpg",
+      "description":"Extreme Exorcism is a paranormal platformer where every move you make comes back to haunt you. Take on the role of Mae Barrons; an Extreme Exorcist with extreme measures. Her supernatural skills are called upon when everything and everyone else has failed to rid a haunted house of its ghostly presence. Conventional methods won’t cut it with these ghosts. Instead, Mae comes armed with a deadly arsenal of ghost-busting weapons, from rocket launchers to razor sharp boomerangs. But these aren’t your average poltergeists. At the end of each round, a ghost appears and mimics your every move from the round before. The longer you survive the more extreme the game becomes. Engage in non-stop ghost annihilation in 10 eerie areas of the haunted house – each room presenting its own hellish hazard. Brave the winds on the balcony and the fire in the kitchen, surviving for as long as you can. With a devilish local multiplayer – you can play co-op or deathmatch modes with up to 3 of your friends, and with 50 unique challenges even the most daring Extreme Exorcist will be put to the test.",
+      "creator": "Nintendo",
+      "platform": "Switch, Wii U",
+      "publisher": "Nintendo",
+      "genre": "Action-Adventure"
+    },
+    {
+      "name": "Among Us",
+      "image_link":"https://media.rawg.io/media/screenshots/67d/67d0e74fd74fd2ea9b847856fb388736.jpg",
+      "description":"Extreme Exorcism is a paranormal platformer where every move you make comes back to haunt you. Take on the role of Mae Barrons; an Extreme Exorcist with extreme measures. Her supernatural skills are called upon when everything and everyone else has failed to rid a haunted house of its ghostly presence. Conventional methods won’t cut it with these ghosts. Instead, Mae comes armed with a deadly arsenal of ghost-busting weapons, from rocket launchers to razor sharp boomerangs. But these aren’t your average poltergeists. At the end of each round, a ghost appears and mimics your every move from the round before. The longer you survive the more extreme the game becomes. Engage in non-stop ghost annihilation in 10 eerie areas of the haunted house – each room presenting its own hellish hazard. Brave the winds on the balcony and the fire in the kitchen, surviving for as long as you can. With a devilish local multiplayer – you can play co-op or deathmatch modes with up to 3 of your friends, and with 50 unique challenges even the most daring Extreme Exorcist will be put to the test.",
+      "creator": "InnerSloth",
+      "platform": "PC, Mobile, Switch",
+      "publisher": "InnerSloth",
+      "genre": "Party, Social Deduction"
+    },
+    {
+      "name": "Dark Souls III",
+      "image_link":"https://media.rawg.io/media/screenshots/67d/67d0e74fd74fd2ea9b847856fb388736.jpg",
+      "description":"Extreme Exorcism is a paranormal platformer where every move you make comes back to haunt you. Take on the role of Mae Barrons; an Extreme Exorcist with extreme measures. Her supernatural skills are called upon when everything and everyone else has failed to rid a haunted house of its ghostly presence. Conventional methods won’t cut it with these ghosts. Instead, Mae comes armed with a deadly arsenal of ghost-busting weapons, from rocket launchers to razor sharp boomerangs. But these aren’t your average poltergeists. At the end of each round, a ghost appears and mimics your every move from the round before. The longer you survive the more extreme the game becomes. Engage in non-stop ghost annihilation in 10 eerie areas of the haunted house – each room presenting its own hellish hazard. Brave the winds on the balcony and the fire in the kitchen, surviving for as long as you can. With a devilish local multiplayer – you can play co-op or deathmatch modes with up to 3 of your friends, and with 50 unique challenges even the most daring Extreme Exorcist will be put to the test.",
+      "creator": "FromSoftware",
+      "platform": "PC, PS4, Xbox One",
+      "publisher": "Bandai Namco Entertainment",
+      "genre": "Action RPG"
+    }
+  ],
+  "getgamereviews": {
+    "Among Us": [
+      {
+        "id": 1,
+        "userName": "StarGazer42",
+        "description": "Absolutely thrilling experience with friends. The suspense of not knowing who the imposter is keeps every round exciting!"
+      },
+      {
+        "id": 2,
+        "userName": "QuietObserver99",
+        "description": "A fantastic social deduction game. It's fun to play the detective role and figure out who's sabotaging the mission."
+      },
+      {
+        "id": 3,
+        "userName": "MysterySleuth88",
+        "description": "Great for quick gaming sessions. It's hilarious when accusations fly, and alliances form. A must-play party game!"
+      }
+    ],
+    "Minecraft": [
+      {
+        "id": 4,
+        "userName": "BlockBuilderPro",
+        "description": "An endless world of possibilities. Whether it's building, exploring, or surviving, Minecraft offers a unique adventure every time."
+      },
+      {
+        "userName": "RedstoneEngineer",
+        "description": "The level of creativity this game offers is unmatched. From simple homes to complex machines, there's always something new to create."
+      },
+      {
+        "userName": "EnderDragonSlayer",
+        "description": "The survival mode is a thrilling challenge, and reaching The End is a satisfying achievement. Also, the modding community is fantastic."
+      }
+    ]
+  }
+}
