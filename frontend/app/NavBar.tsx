@@ -13,16 +13,10 @@ const NavBar = () => {
   const currentPath = usePathname();
   const links =[
     {name: 'Home', path: '/'},
-<<<<<<< HEAD
-    {name: 'Search', path: '/search'},
-    {name: 'Reviews', path: '/reviews'},
     {name: 'Profile', path: '/profile'},
     {name: 'Login', path: '/login'},
     {name: 'Signup', path: '/signup'},
     {name: 'ForgotPassword', path: '/forgotpassword'}
-=======
-    {name: 'Profile', path: '/profile'}
->>>>>>> main
   ]
   // Filter the links to just the ones that can be accessed via the nav bar
   // Does not include login, signup, or forgot password pages

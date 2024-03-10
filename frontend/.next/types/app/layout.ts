@@ -1,4 +1,4 @@
-// File: /Users/justsunli/Documents/cs130-project/deployedvr/frontend/app/layout.tsx
+// File: /Users/justsunli/Documents/gameglance_frontend/frontend/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

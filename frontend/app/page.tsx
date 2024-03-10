@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-import Image from 'next/image'
 
-export default function Home() {
-  return (
-    <div>Click on the above panels to search for games/reviews, post your own review, or view your profile.</div>
-  ) 
-=======
 'use client'
 import React, { useState, useEffect } from 'react'
 import SideBarGenre from './components/SideBarGenre'
@@ -22,7 +15,7 @@ interface GameDetails {
   genre: string;
   ai_summary: string;
   image_link: string;
->>>>>>> main
+
 }
 
 const Home = () => {
