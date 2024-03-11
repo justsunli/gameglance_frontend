@@ -2,7 +2,7 @@
 const nextConfig = {
     output: 'export',
     env: {
-        BACKEND_URL: "https://18.216.152.159.nip.io",
+        BACKEND_URL: "http://3.142.199.84:8080",
     }
 }
 
