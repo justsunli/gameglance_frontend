@@ -14,8 +14,11 @@ import { FirebaseError } from 'firebase/app';
 const SignupPage: FC = () => {
     const paperStyle: React.CSSProperties = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
     const avatarStyle: React.CSSProperties = { backgroundColor: 'red' };
-    const buttonStyle: React.CSSProperties = { margin: '8px 0' };
-    
+    const buttonStyle: React.CSSProperties = { margin: '8px 0', backgroundColor: 'lightcyan', borderWidth: 2, borderColor: 'black', paddingLeft: 8, paddingRight: 8};
+    const linkStyle: React.CSSProperties = {backgroundColor: 'lightcyan', borderWidth: 2, borderColor: 'black', paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3};
+    const inputStyle: React.CSSProperties = {margin: '8px 0', borderWidth: 2, borderColor: 'gray', paddingLeft: 8, paddingRight: 8};
+    const typographyStyle: React.CSSProperties = {margin: '8px 0'};
+
     // Error types
     const ERRORS = {
         "auth/email-already-in-use": "Sorry, this email has already been taken.",
@@ -51,6 +54,7 @@ const SignupPage: FC = () => {
                 email,
                 password,
             );
+            const user_id = userCred.user.id;
             navigate('/', {replace: true});
             navigate(0);
             const succCode = await axios({
@@ -79,15 +83,15 @@ const SignupPage: FC = () => {
                     <Avatar style={avatarStyle}><VideogameAssetIcon /></Avatar>
                     <h2>Create an account</h2>
                     <form onSubmit = {CreateProfile}>
-                        <input id = "name" placeholder='Enter your name' onChange = {e => setName(e.target.value)} type = "name" />
-                        <input id = "email" placeholder='Enter your email' onChange = {e => setEmail(e.target.value)} type = "email" />
-                        <input id = "password" placeholder='Enter your password' onChange = {e => setPassword(e.target.value)} type = "password" />
+                        <input id = "name" placeholder='Enter your name' onChange = {e => setName(e.target.value)} type = "name" style = {inputStyle}/>
+                        <input id = "email" placeholder='Enter your email' onChange = {e => setEmail(e.target.value)} type = "email" style = {inputStyle}/>
+                        <input id = "password" placeholder='Enter your password' onChange = {e => setPassword(e.target.value)} type = "password" style = {inputStyle}/>
                         <button type="submit" color="primary" style={buttonStyle}>Sign Up</button>
                     </form>
-                    <Typography>
+                    <Typography style = {typographyStyle}>
                         Do you have an existing account?
                     </Typography>
-                    <Link href="/login">Login here!</Link>
+                    <Link href="/login" style={linkStyle}>Login here!</Link>
                     {errorHandler.isError ?(
                         <div>{errorHandler.errorMessage}</div>
                     ): null}

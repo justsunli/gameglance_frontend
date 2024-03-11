@@ -5,16 +5,23 @@ import React, { useEffect, useState } from "react";
 import PersonProfile from "../components/PersonProfile";
 import ReviewCard from "../components/ReviewCard";
 import axios from "axios";
+import {auth} from '../components/firebase';
 
 const ProfilePage = () => {
     // Display the user's information, along with their reviews
-
+ 
+    // auth.onAuthStateChanged(auth, (currentUser) => {
+    //     const user = auth.currentUser;
+    //     console.log("User: ", user);
+    //     const user_id = user.uid;
+    // })
+    const user_id = 14;
     const[profile, setProfile] = useState('');
     const[reviewList, setReviewsList] = useState([]);
 
     const getUserProfile = async () => {
-        //const url = 'http://localhost:8080/user/' + user_id;
-        const url = 'http://localhost:8080/user/13';
+        const url = 'http://localhost:8080/user/' + user_id;
+        //const url = 'http://localhost:8080/user/13';
             //useEffect(() => {
             try {
                 const profileResponse = await axios({
@@ -32,7 +39,7 @@ const ProfilePage = () => {
     }
 
     const getReviews = async () => {
-        const reviewURL = 'http://localhost:8080/review/user/14';
+        const reviewURL = 'http://localhost:8080/review/user/' + user_id;
         try {
         const reviewResponse = await axios({
             method: 'GET',
