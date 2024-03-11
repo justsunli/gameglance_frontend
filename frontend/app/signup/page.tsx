@@ -1,8 +1,10 @@
 "use client"
 
 import React, { FC, useState } from 'react';
-import { Grid, Paper, TextField, Avatar, Button, Typography } from '@material-ui/core';
-import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
+import { Grid, Paper, TextField, Avatar, Button, Typography } from '@mui/material';
+// import { Grid, Avatar, Text} from "@radix-ui/themes";
+// import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
+import { PiGameControllerFill } from "react-icons/pi";
 import Link from 'next/link';
 import {BrowserRouter, Router, redirect, useNavigate} from 'react-router-dom';
 import axios from 'axios';
@@ -76,7 +78,7 @@ const SignupPage: FC = () => {
         <Grid>
             <Paper elevation={10} style={paperStyle}>
                 <Grid alignItems="center" justifyContent='center'>
-                    <Avatar style={avatarStyle}><VideogameAssetIcon /></Avatar>
+                    <Avatar style={avatarStyle}><PiGameControllerFill /></Avatar>
                     <h2>Create an account</h2>
                     <form onSubmit = {CreateProfile}>
                         <input id = "name" placeholder='Enter your name' onChange = {e => setName(e.target.value)} type = "name" />

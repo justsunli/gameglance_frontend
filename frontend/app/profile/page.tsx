@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 "use client"
 
 import { Box, Card, Grid, Text} from "@radix-ui/themes";
@@ -93,14 +93,3 @@ const ProfilePage = () => {
 }
 
 export default ProfilePage;
-=======
-import React from 'react'
-
-const profile = () => {
-  return (
-    <div>this is the profile</div>
-  )
-}
-
-export default profile
->>>>>>> main

@@ -1,8 +1,10 @@
 "use client"
 
 import React, { FC, useState } from 'react';
-import { Grid, Paper, TextField, Avatar, Button, Typography} from '@material-ui/core';
-import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
+import { Grid, Paper, TextField, Avatar, Button, Typography} from '@mui/material';
+// import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
+import { PiGameControllerFill } from "react-icons/pi";
+
 import Link from 'next/link';
 import { error } from 'console';
 import axios from 'axios';
@@ -33,7 +35,7 @@ const Forgotpassword: FC = () => {
         <Grid>
             <Paper elevation={10} style={paperStyle}>
                 <Grid alignItems="center" justifyContent='center'>
-                    <Avatar style={avatarStyle}><VideogameAssetIcon /></Avatar>
+                    <Avatar style={avatarStyle}><PiGameControllerFill /></Avatar>
                     <h2>Recover Password</h2>
                     <form onSubmit = {CheckEmail}>
                         <input id = "email" placeholder='Enter your email' onChange = {e => setEmail(e.target.value)} type = "email" />

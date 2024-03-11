@@ -1,12 +1,12 @@
 "use client"
 
-import { FormControlLabel, Grid, Paper, TextField } from '@material-ui/core';
-import { Avatar } from '@material-ui/core';
+import { FormControlLabel, Grid, Paper, TextField } from '@mui/material';
+import { Avatar } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
-import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
-import { CheckBox } from '@material-ui/icons';
-import { Button } from '@material-ui/core';
-import { Typography} from '@material-ui/core';
+// import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
+import { PiGameControllerFill } from "react-icons/pi";
+
+import { Typography} from '@mui/material';
 import Link from 'next/link';
 import axios from 'axios';
 import { error } from 'console';
@@ -65,7 +65,7 @@ const LoginPage: FC<LoginProps> = () => {
             <Paper elevation = {10} style = {paperStyle}>
                 <Grid alignItems="center" justifyContent='center'>
                     <Avatar style = {avatarStyle}>
-                        <VideogameAssetIcon/>
+                        <PiGameControllerFill/>
                     </Avatar>
                     <h2>Login</h2>
                     <form onSubmit = {AuthenticateUser}>
