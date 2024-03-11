@@ -23,7 +23,7 @@ const ReviewCard = ({ game_id }: { game_id: number }) => {
   useEffect(() => {
     const fetchGameReviews = async () => {
       try {
-        const response = await axios.get(`${process.env.BACKEND_URL}/getgamereviews/${game_id}`);
+        const response = await axios.get(`${process.env.BACKEND_URL}/game/getGameReviews/${game_id}`);
         const gameReviews: Review[] = response.data;
         setReviews(gameReviews);
 
@@ -47,7 +47,7 @@ const ReviewCard = ({ game_id }: { game_id: number }) => {
   }
   return (
     <div style={{ display: 'grid', gap:'20px' }}>
-      {reviews.map((review, index) => {
+      {reviews.map((post, index) => {
           const userReview = userReviews[index];
           return(
             <div key={index}>
@@ -57,7 +57,13 @@ const ReviewCard = ({ game_id }: { game_id: number }) => {
                   {userReview.username}
                 </Text>
                 <Text as="div" size="2" color="gray">
-                  {review.review} 
+                  {post.use_id} 
+                </Text>
+                <Text as="div" size="2" color="gray">
+                  {post.rating} 
+                </Text>
+                <Text as="div" size="2" color="gray">
+                  {post.review} 
                 </Text>
               </Box>
             </Card>

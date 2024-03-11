@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Ratings } from '../../components/Ratings';
 import { RatingSlider } from '@/app/components/RatingSlider';
+import { auth } from '../../components/firebase';
 
 interface ReviewForm{
   user_id: number;
@@ -28,11 +29,28 @@ const NewReview = (props: GameID) => {
   const [error, setError] = useState('');
   const [currentRating, setCurrentRating] = useState(0); // keep track of the current rating
   const [key, setKey] = useState(0);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     if (props.game_id !== undefined) {
       setValue('game_id', props.game_id);
     }
+
+    const fetchUserId = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          console.log('user:', user.email)
+          const response = await axios.get(`${process.env.BACKEND_URL}/user/email/${user.email}`);
+          console.log('user id:', response.data.id);
+          setValue('user_id', response.data.id);
+        }
+      } catch (error) {
+        console.error('Error fetching user ID', error);
+      }
+    };
+
+    fetchUserId();
   }, [props.game_id, setValue]);
 
   const handleRatingChange = (newRating: number | number []) => {
@@ -56,6 +74,7 @@ const NewReview = (props: GameID) => {
           data.game_id = Number(data.game_id);
           console.log(data);
           const response = await axios.post(`${process.env.BACKEND_URL}/review/addReview`, data);
+          console.log(response);
           reset();
           setCurrentRating(0);
           setKey(prevKey => prevKey + 1)
