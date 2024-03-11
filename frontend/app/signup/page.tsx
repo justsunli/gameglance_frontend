@@ -57,7 +57,7 @@ const SignupPage: FC = () => {
             navigate(0);
             const succCode = await axios({
                 method: 'POST',
-                url: 'http://localhost:8080/user/addUser',
+                url: `${process.env.BACKEND_URL}/user/addUser`,
                 data: JSON.stringify({
                     "name": name,
                     "email": email
