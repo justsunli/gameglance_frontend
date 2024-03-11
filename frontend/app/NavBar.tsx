@@ -5,15 +5,14 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { PiGameControllerFill } from "react-icons/pi";
 import classnames from 'classnames';
+import SearchBar from './components/SearchBar';
+
 
 // TODO: implement NavBar with a logo, homepage, search bar and user profile
 const NavBar = () => {
   const currentPath = usePathname();
-  console.log(currentPath);
   const links =[
     {name: 'Home', path: '/'},
-    {name: 'Search', path: '/search'},
-    {name: 'Reviews', path: '/reviews'},
     {name: 'Profile', path: '/profile'},
     {name: 'Login', path: '/login'},
     {name: 'Signup', path: '/signup'},
@@ -36,7 +35,7 @@ const NavBar = () => {
         href={link.path}>{link.name}
         </Link>)}
       </ul>
-  
+      <SearchBar/>
     </nav>
 
   )
