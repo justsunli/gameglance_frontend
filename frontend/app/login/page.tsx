@@ -23,7 +23,10 @@ const LoginPage: FC<LoginProps> = () => {
 
     const paperStyle: React.CSSProperties = {padding: 20, height: '70vh', width: 280, margin: "20px auto"}
     const avatarStyle: React.CSSProperties = {backgroundColor: 'red'}
-    const buttonStyle: React.CSSProperties = {margin: '8px 0'}
+    const buttonStyle: React.CSSProperties = { margin: '8px 0', backgroundColor: 'lightcyan', borderWidth: 2, borderColor: 'black', paddingLeft: 8, paddingRight: 8};
+    const linkStyle: React.CSSProperties = {backgroundColor: 'lightcyan', borderWidth: 2, borderColor: 'black', paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3};
+    const inputStyle: React.CSSProperties = {margin: '8px 0', borderWidth: 2, borderColor: 'gray', paddingLeft: 8, paddingRight: 8};
+    const typographyStyle: React.CSSProperties = {margin: '8px 0'};
 
     // the email
     const[email, setEmail] = useState('');
@@ -47,6 +50,7 @@ const LoginPage: FC<LoginProps> = () => {
             const loginCred = await signInWithEmailAndPassword(
                 auth, email, password,
             );
+            const user_id = loginCred.user.id;
              //FIXME: Redirect user to home page if login is successful
              navigate('/', {replace: true});
              navigate(0);
@@ -69,8 +73,8 @@ const LoginPage: FC<LoginProps> = () => {
                     </Avatar>
                     <h2>Login</h2>
                     <form onSubmit = {AuthenticateUser}>
-                        <input id = "email" placeholder='Enter your email' onChange = {e => setEmail(e.target.value)} type = "email" />
-                        <input id = "password" placeholder='Enter your password' onChange = {e => setPassword(e.target.value)} type = "password" />
+                        <input id = "email" placeholder='Enter your email' onChange = {e => setEmail(e.target.value)} type = "email" style = {inputStyle}/>
+                        <input id = "password" placeholder='Enter your password' onChange = {e => setPassword(e.target.value)} type = "password" style = {inputStyle}/>
                         <button type="submit" color="primary" style={buttonStyle}>Login</button>
                     </form>
                     {/* <FormControlLabel
@@ -82,15 +86,15 @@ const LoginPage: FC<LoginProps> = () => {
                         }
                         label = "Remember me"
                     /> */}
-                    <Typography>
+                    <Typography style = {typographyStyle}>
                         Forgot password?
                     </Typography>
                     
-                    <Link href="/forgotpassword">Reset your password here!</Link>
-                    <Typography>                      
+                    <Link href="/forgotpassword" style = {linkStyle}>Reset your password here!</Link>
+                    <Typography style = {typographyStyle}>                      
                         New to GameGlance?
                     </Typography>
-                    <Link href="/signup">Sign up here!</Link>
+                    <Link href="/signup" style = {linkStyle}>Sign up here!</Link>
                     {errorHandler.isError ?(
                         <div>{errorHandler.errorMessage}</div>
                     ): null}
