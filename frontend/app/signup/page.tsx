@@ -8,12 +8,14 @@ import { PiGameControllerFill } from "react-icons/pi";
 import Link from 'next/link';
 import {BrowserRouter, Router, redirect, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {auth} from '../components/firebase';
+// import {auth} from '../components/firebase';
+import { getAuth } from 'firebase/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 
 
 const SignupPage: FC = () => {
+    const auth = getAuth();
     const paperStyle: React.CSSProperties = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
     const avatarStyle: React.CSSProperties = { backgroundColor: 'red' };
     const buttonStyle: React.CSSProperties = { margin: '8px 0', backgroundColor: 'lightcyan', borderWidth: 2, borderColor: 'black', paddingLeft: 8, paddingRight: 8};
@@ -61,7 +63,7 @@ const SignupPage: FC = () => {
             navigate(0);
             const succCode = await axios({
                 method: 'POST',
-                url: '${process.env.BACKEND_URL}/user/addUser',
+                url: `${process.env.BACKEND_URL}/user/addUser`,
                 data: JSON.stringify({
                     "name": name,
                     "email": email

@@ -9,7 +9,7 @@ interface Review {
     game_id: number;
     review: string;
     rating: number;
-  }
+}
 
 const ProfilePage = () => {
 //   const [profile, setProfile] = useState('');
@@ -17,11 +17,11 @@ const ProfilePage = () => {
   const [userId, setUserId] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [username, setUsername] = useState(null);
+  const [reviewedGames, setReviewedGames] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchUserId = async () => {
       const user = auth.currentUser;
-
       if (user) {
         const response = await axios.get(`${process.env.BACKEND_URL}/user/email/${user.email}`);
         setUserId(response.data.id);
@@ -39,7 +39,6 @@ const ProfilePage = () => {
         const reviewURL = `${process.env.BACKEND_URL}/review/user/${userId}`;
         try {
           const reviewResponse = await axios.get(reviewURL);
-
           setReviewsList(reviewResponse.data);
 
         } catch (error) {
@@ -55,7 +54,25 @@ const ProfilePage = () => {
     getReviews();
   }, [userId]);
 
-
+  useEffect(() => {
+    const getReviewedGames = async () => {
+      if (reviewList.length > 0) {
+        try {
+          const gamesPromises = reviewList.map(review => axios.get(`${process.env.BACKEND_URL}/game/${review.game_id}`));
+          const reviewedGamesNamesPromises = await Promise.all(gamesPromises);
+          const gameNamesData: string[] = reviewedGamesNamesPromises.map(response => response.data.name);
+          setReviewedGames(gameNamesData);          
+        } catch (error) {
+          if (error instanceof Error) {
+              console.log("Error: Failed to get reviews.", error.message);
+            } else {
+              console.log("An error occurred while fetching reviews.");
+            }   
+        }
+      } 
+    };
+    getReviewedGames();
+  }, [reviewList]);
   return (
     <div>
       <div style={{ display: 'grid', gap:'20px' }}>
@@ -68,25 +85,37 @@ const ProfilePage = () => {
           </Text>
         </div>
       </div>
-      <div style={{ display: 'grid', gap:'20px' }}>
-        {reviewList.map((review, index) => (  
-          <div key={index}>
-            <Card size="2">
-              <Box>
-                <Text as="div" size="2" weight="bold">
-                  {review.game_id}
-                </Text>
-                <Text as="div" size="2" color="gray">
-                  {review.review} 
-                </Text>
-                <Text as="div" size="2" color="yellow">
-                  {review.rating} 
-                </Text>
-              </Box>
-            </Card>
+      {
+        reviewList ? (
+          <div style={{ display: 'grid', gap:'20px' }}>
+            {reviewList.map((review, index) => (  
+              <div key={index}>
+                <Card size="2">
+                  <Box>
+                    <a href={`/reviews/${review.game_id}`}>
+                    <Text as="div" size="2" weight="bold">
+                      {reviewedGames[index]}
+                    </Text>
+                    </a>
+                    <Text as="div" size="2" color="gray">
+                      {review.review} 
+                    </Text>
+                    <Text as="div" size="2" color="yellow">
+                      {review.rating} 
+                    </Text>
+                  </Box>
+                </Card>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        ) : 
+        <div>
+          <Text as="div" size="2" weight="bold">
+            No reviews found.
+          </Text>
+        </div>
+      }
+
     </div>
   )
 }

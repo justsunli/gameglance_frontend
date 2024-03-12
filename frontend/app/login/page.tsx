@@ -11,7 +11,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { error } from 'console';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../components/firebase';
+import { getAuth } from 'firebase/auth';
 import { BrowserRouter, redirect, useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
 
@@ -20,6 +20,7 @@ interface LoginProps {}
 class IncorrectPasswordError extends SyntaxError {}
 
 const LoginPage: FC<LoginProps> = () => {
+    const auth = getAuth();
 
     const paperStyle: React.CSSProperties = {padding: 20, height: '70vh', width: 280, margin: "20px auto"}
     const avatarStyle: React.CSSProperties = {backgroundColor: 'red'}

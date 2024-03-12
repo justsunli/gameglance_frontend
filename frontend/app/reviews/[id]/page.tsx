@@ -9,7 +9,7 @@ import { FaCircleUser } from "react-icons/fa6";
 
 
 export async function generateStaticParams() {
-  const games = await fetch(`${process.env.BACKEND_URL}/game/getGames`).then((res) => res.json());
+  const games = await fetch(`${process.env.BACKEND_URL}/game/getGames?num_games=400`).then((res) => res.json());
   return games.map((game: any) => ({
     id: game.id.toString(),
   }))
