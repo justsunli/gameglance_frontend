@@ -55,11 +55,11 @@ const GameCard = (props: GameID) => {
   // const [gameDetail] = gameDetails;
   const gameDetailItems = [
     { title: "Game Description", detail: gameDetail.description },
-    { title: "Game Designer", detail: gameDetail.creator },  ];
+    { title: "Game Designer", detail: gameDetail.creator },  
+    { title: "Total Reviews", detail: gameDetail.num_reviews },];
 
   const progressBarItems = [
-    { ratingText: "Overall Rating", initialValue: 13, finalValue: 10 },
-    { ratingText: "Gameplay Rating", initialValue: 13, finalValue: 90 },
+    { ratingText: "Overall Rating", initialValue: 13, finalValue: gameDetail.overall_rating },
     // Add more items as needed
   ];
 
