@@ -8,7 +8,7 @@ const ProgressRoot = styled(Progress.Root)`
   background: #8080806b;
   border-radius: 99999px;
   width: 350px;
-  height: 15px;
+  height: 12px;
   transform: translateZ(0);
 `;
 

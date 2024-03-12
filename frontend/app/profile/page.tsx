@@ -1,6 +1,4 @@
-
 "use client"
-
 import { Box, Card, Grid, Text} from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import PersonProfile from "../components/PersonProfile";
@@ -9,94 +7,79 @@ import axios from "axios";
 import {auth} from '../components/firebase';
 
 const ProfilePage = () => {
-    // Display the user's information, along with their reviews
- 
-    // auth.onAuthStateChanged(auth, (currentUser) => {
-    //     const user = auth.currentUser;
-    //     console.log("User: ", user);
-    //     const user_id = user.uid;
-    // })
-    const user_id = 14;
-    const[profile, setProfile] = useState('');
-    const[reviewList, setReviewsList] = useState([]);
+//   const [profile, setProfile] = useState('');
+  const [reviewList, setReviewsList] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  const [username, setUsername] = useState(null);
 
-    const getUserProfile = async () => {
-        const url = 'http://localhost:8080/user/' + user_id;
-        //const url = 'http://localhost:8080/user/13';
-            //useEffect(() => {
-            try {
-                const profileResponse = await axios({
-                    method: 'GET',
-                    url: url,
-                    //responseType: 'text'
-                });
-                //console.log("Data: ", profileResponse.data);
-                setProfile(profileResponse.data);
-                //return profileResponse.data;
-            }
-            catch(error) {
-                console.log("Error: Failed to get profile.", error.message);
-            }
-    }
+  useEffect(() => {
+    const fetchUserId = async () => {
+      const user = auth.currentUser;
 
+      if (user) {
+        const response = await axios.get(`${process.env.BACKEND_URL}/user/email/${user.email}`);
+        setUserId(response.data.id);
+        setUserEmail(response.data.email);
+        setUsername(response.data.username);
+      }
+    };
+
+    fetchUserId();
+  }, []);
+
+  useEffect(() => {
     const getReviews = async () => {
-        const reviewURL = 'http://localhost:8080/review/user/' + user_id;
+      if (userId) {
+        const reviewURL = `${process.env.BACKEND_URL}/review/user/${userId}`;
         try {
-        const reviewResponse = await axios({
-            method: 'GET',
-            url: reviewURL,
-            //responseType: 'text'
-        });
-            console.log("reviews: ", reviewResponse.data);
-            setReviewsList(reviewResponse.data);
-        }catch(error){
-            console.log("Error: Failed to get reviews.", error.message);
-        }
-    }
-    getUserProfile();
-    getReviews();
-    //console.log("Data: ", profile);
+          const reviewResponse = await axios.get(reviewURL);
 
-    if(!profile){
-       return <div>Loading profile...</div>
-    }
-    //if(!reviewList){
-    //    return <div>Loading reviews...</div>
-    //}
-    //console.log("data: ", profile);
-    return(
+          setReviewsList(reviewResponse.data);
+
+        } catch (error) {
+          console.log("Error: Failed to get reviews.", error.message);
+        }
+      }
+    };
+
+    getReviews();
+  }, [userId]);
+
+
+  return (
+    <div>
+      <div style={{ display: 'grid', gap:'20px' }}>
         <div>
-            <div style={{ display: 'grid', gap:'20px' }}>
-                <div>
-                    <Text as="div" size="4" weight="bold">
-                        {profile.username}
-                    </Text>
-                    <Text as="div" size="2" weight="bold">
-                        {profile.email}
-                    </Text>
-                </div>
-            </div>
-            <div style={{ display: 'grid', gap:'20px' }}>
-            {reviewList.map(review => (  
-            <div>
-                <Card size="2">
-                    <Box>
-                        <Text as="div" size="2" weight="bold">
-                            {review.game_id}
-                        </Text>
-                        <Text as="div" size="2" color="gray">
-                            {review.review} 
-                        </Text>
-                        <Text as="div" size="2" color="yellow">
-                            {review.rating} 
-                        </Text>
-                    </Box>
-                </Card>
-          </div>
-            ))}
+          <Text as="div" size="4" weight="bold">
+            {username}
+          </Text>
+          <Text as="div" size="2" weight="bold">
+            {userEmail}
+          </Text>
         </div>
       </div>
-    )
+      <div style={{ display: 'grid', gap:'20px' }}>
+        {reviewList.map(review => (  
+          <div>
+            <Card size="2">
+              <Box>
+                <Text as="div" size="2" weight="bold">
+                  {review.game_id}
+                </Text>
+                <Text as="div" size="2" color="gray">
+                  {review.review} 
+                </Text>
+                <Text as="div" size="2" color="yellow">
+                  {review.rating} 
+                </Text>
+              </Box>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 export default ProfilePage;
