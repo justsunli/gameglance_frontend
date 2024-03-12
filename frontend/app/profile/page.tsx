@@ -1,14 +1,19 @@
 "use client"
 import { Box, Card, Grid, Text} from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
-import PersonProfile from "../components/PersonProfile";
 import ReviewCard from "../components/ReviewCard";
 import axios from "axios";
 import {auth} from '../components/firebase';
 
+interface Review {
+    game_id: number;
+    review: string;
+    rating: number;
+  }
+
 const ProfilePage = () => {
 //   const [profile, setProfile] = useState('');
-  const [reviewList, setReviewsList] = useState([]);
+  const [reviewList, setReviewsList] = useState<Review[]>([]);
   const [userId, setUserId] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [username, setUsername] = useState(null);
@@ -38,7 +43,11 @@ const ProfilePage = () => {
           setReviewsList(reviewResponse.data);
 
         } catch (error) {
-          console.log("Error: Failed to get reviews.", error.message);
+            if (error instanceof Error) {
+                console.log("Error: Failed to get reviews.", error.message);
+              } else {
+                console.log("An error occurred while fetching reviews.");
+              }
         }
       }
     };
@@ -60,8 +69,8 @@ const ProfilePage = () => {
         </div>
       </div>
       <div style={{ display: 'grid', gap:'20px' }}>
-        {reviewList.map(review => (  
-          <div>
+        {reviewList.map((review, index) => (  
+          <div key={index}>
             <Card size="2">
               <Box>
                 <Text as="div" size="2" weight="bold">

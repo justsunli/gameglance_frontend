@@ -56,7 +56,7 @@ const SignupPage: FC = () => {
                 email,
                 password,
             );
-            const user_id = userCred.user.id;
+            // const user_id = userCred.user.id;
             navigate('/', {replace: true});
             navigate(0);
             const succCode = await axios({
