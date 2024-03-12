@@ -1,22 +1,15 @@
 "use client"
 
-import { FormControlLabel, Grid, Paper, TextField } from '@mui/material';
-import { Avatar } from '@mui/material';
+import { FormControlLabel, Grid, Paper, TextField, Avatar, Typography, Alert } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
-// import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import { PiGameControllerFill } from "react-icons/pi";
-
-import { Typography} from '@mui/material';
 import Link from 'next/link';
 import axios from 'axios';
 import { error } from 'console';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../components/firebase';
-// import { BrowserRouter, redirect, useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
-
 import { useRouter } from 'next/navigation';
-
 
 interface LoginProps {}
 
@@ -35,7 +28,7 @@ const LoginPage: FC<LoginProps> = () => {
     const[email, setEmail] = useState('');
     // the password
     const[password, setPassword] = useState('');
-
+    
     // whether an error occurred
     const [errorHandler, setErrorHandler] = useState({
         isError: false,
@@ -56,13 +49,14 @@ const LoginPage: FC<LoginProps> = () => {
             // const user_id = loginCred.user.id;
              //FIXME: Redirect user to home page if login is successful
              router.push('/');
-
+             window.alert('Login successful');
         } catch(error: unknown){
             const err = error as FirebaseError;
             setErrorHandler({
                 isError: true,
                 errorMessage: "Email or password is incorrect."
             })
+            window.alert('Login failed. Please try again.');
         }
     }
 

@@ -61,6 +61,7 @@ const SignupPage: FC = () => {
             // navigate('/', {replace: true});
             // navigate(0);
             router.push('/');
+            window.alert('Account created successfully');
             const succCode = await axios({
                 method: 'POST',
                 url: '${process.env.BACKEND_URL}/user/addUser',
@@ -76,6 +77,7 @@ const SignupPage: FC = () => {
                 errorMessage: ERRORS[err.code as keyof typeof ERRORS],
                 //errorMessage: err.code,
             })
+        
         }
     }
 
