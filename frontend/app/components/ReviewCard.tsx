@@ -10,6 +10,7 @@ interface Review {
   id: number;
   user_id: number;
   review: string;
+  rating: number;
 
 }
 
@@ -61,7 +62,7 @@ const ReviewCard = ({ game_id }: ReviewCardProps) => {
             <div key={index}>
             <Card size="2">
               <Box>
-                <Flex css={{ alignItems: 'center' }} >
+                <Flex >
                   <FaCircleUser size= {30} style={{ marginRight: '10px' }} />
                   <Text as="div" size="3" weight="bold" style={{ marginBottom: '20px'}}>
                     {/* {userReview && userReview.username} */}

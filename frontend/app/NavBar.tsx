@@ -12,7 +12,7 @@ import { auth } from './components/firebase';
 // TODO: implement NavBar with a logo, homepage, search bar and user profile
 const NavBar = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);;
   const currentPath = usePathname();
   const links =[
     {name: 'Home', path: '/'},
@@ -57,7 +57,7 @@ const NavBar = () => {
         })}
         href={link.path}>{link.name}
         </Link>)}
-        <SearchBar className='hover:text-zinc-800 transition-colors' />
+        <SearchBar />
       </div>
       <div className='flex space-x-6'>
         {isSignedIn && <div>{userEmail}</div>}

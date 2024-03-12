@@ -11,7 +11,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { error } from 'console';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import {auth} from '../components/firebase';
+import { auth } from '../components/firebase';
 import { BrowserRouter, redirect, useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
 
@@ -50,7 +50,7 @@ const LoginPage: FC<LoginProps> = () => {
             const loginCred = await signInWithEmailAndPassword(
                 auth, email, password,
             );
-            const user_id = loginCred.user.id;
+            // const user_id = loginCred.user.id;
              //FIXME: Redirect user to home page if login is successful
              navigate('/', {replace: true});
              navigate(0);

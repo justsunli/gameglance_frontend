@@ -17,7 +17,10 @@ interface GameDetails {
   genre: string;
   ai_summary: string;
   image_link: string;
+  num_reviews: number;
+  overall_rating: number;
 }
+
 
 interface GameDetail {
   title: string;
@@ -93,7 +96,7 @@ const GameCard = (props: GameID) => {
       <Card size="2">
         <Box>
           {gameDetailItems.map((item, index) => (
-            <GameDetail key={index} title={item.title} detail={item.detail} />
+            <GameDetail key={index} title={item.title} detail={String(item.detail)} />
           ))}
         </Box>
       </Card>
@@ -119,4 +122,3 @@ const GameCard = (props: GameID) => {
 }
 
 export default GameCard;
-
