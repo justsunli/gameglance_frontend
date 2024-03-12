@@ -6,12 +6,13 @@ import { Grid, Paper, TextField, Avatar, Button, Typography } from '@mui/materia
 // import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import { PiGameControllerFill } from "react-icons/pi";
 import Link from 'next/link';
-import {BrowserRouter, Router, redirect, useNavigate} from 'react-router-dom';
+// import {BrowserRouter, Router, redirect, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {auth} from '../components/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 
+import { useRouter } from 'next/navigation';
 
 const SignupPage: FC = () => {
     const paperStyle: React.CSSProperties = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
@@ -39,7 +40,7 @@ const SignupPage: FC = () => {
         errorMessage: "",
     })
 
-    const navigate = useNavigate();
+    const router = useRouter();
 
     const CreateProfile = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -57,8 +58,9 @@ const SignupPage: FC = () => {
                 password,
             );
             // const user_id = userCred.user.id;
-            navigate('/', {replace: true});
-            navigate(0);
+            // navigate('/', {replace: true});
+            // navigate(0);
+            router.push('/');
             const succCode = await axios({
                 method: 'POST',
                 url: '${process.env.BACKEND_URL}/user/addUser',
@@ -104,10 +106,6 @@ const SignupPage: FC = () => {
 }
 
 const Signup: FC = () => {
-    return (
-        <BrowserRouter>
-            <SignupPage/>
-        </BrowserRouter>
-    )
+    return <SignupPage />;
 }
 export default Signup;

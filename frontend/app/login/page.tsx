@@ -12,8 +12,11 @@ import axios from 'axios';
 import { error } from 'console';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../components/firebase';
-import { BrowserRouter, redirect, useNavigate } from 'react-router-dom';
+// import { BrowserRouter, redirect, useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
+
+import { useRouter } from 'next/navigation';
+
 
 interface LoginProps {}
 
@@ -39,7 +42,7 @@ const LoginPage: FC<LoginProps> = () => {
         errorMessage: "",
     })
 
-    const navigate = useNavigate();
+    const router = useRouter();
     
     const AuthenticateUser = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -52,8 +55,8 @@ const LoginPage: FC<LoginProps> = () => {
             );
             // const user_id = loginCred.user.id;
              //FIXME: Redirect user to home page if login is successful
-             navigate('/', {replace: true});
-             navigate(0);
+             router.push('/');
+
         } catch(error: unknown){
             const err = error as FirebaseError;
             setErrorHandler({
@@ -105,10 +108,6 @@ const LoginPage: FC<LoginProps> = () => {
 }
 
 const Login: FC = () => {
-    return (
-        <BrowserRouter>
-            <LoginPage/>
-        </BrowserRouter>
-    )
+    return <LoginPage/>
 }
 export default Login;
