@@ -19,7 +19,7 @@ const ProfilePage = () => {
     const [userId, setUserId] = useState(null);
     const [userEmail, setUserEmail] = useState(null);
     const [username, setUsername] = useState(null);
-    const [reviewedGames, setReviewedGames] = useState<string[]>([]);
+    const [reviewedGames, setReviewedGames] = useState<{name: string, image_link: string}[]>([]);
 
     useEffect(() => {
         const fetchUserId = async () => {
