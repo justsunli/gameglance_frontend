@@ -20,10 +20,15 @@ interface GameID {
   game_id: number | undefined;
 }
 
+// interface NewReviewProps extends GameID {
+//   onNewReview: () => void;
+// }
+
 const NewReview = (props: GameID) => {
 
   // console.log('gameId:', props.game_id);
   // const router = useRouter();
+
   // handle the form submission
   const {register, handleSubmit, setValue, reset} = useForm<ReviewForm>();
   const [error, setError] = useState('');
@@ -78,6 +83,7 @@ const NewReview = (props: GameID) => {
           reset();
           setCurrentRating(0);
           setKey(prevKey => prevKey + 1)
+          // props.onNewReview(); // trigger a re-fetch of the reviews
           
         } catch (error) {
           setError('An error occurred');
