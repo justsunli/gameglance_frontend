@@ -6,9 +6,12 @@ import axios from "axios";
 import {auth} from '../components/firebase';
 import ProgressBar from "../components/ProgressBar";
 import { FaCircleUser } from "react-icons/fa6";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+
 
 interface Review {
     game_id: number;
+    id: number;
     review: string;
     rating: number;
   }
@@ -20,6 +23,7 @@ const ProfilePage = () => {
     const [userEmail, setUserEmail] = useState(null);
     const [username, setUsername] = useState(null);
     const [reviewedGames, setReviewedGames] = useState<{name: string, image_link: string}[]>([]);
+    const [reviewDeleted, setReviewDeleted] = useState(0);
 
     useEffect(() => {
         const fetchUserId = async () => {
@@ -56,7 +60,7 @@ const ProfilePage = () => {
         };
 
         getReviews();
-    }, [userId]);
+    }, [userId, reviewDeleted]);
 
     useEffect(() => {
       const getReviewedGames = async () => {
@@ -77,7 +81,19 @@ const ProfilePage = () => {
         } 
       };
       getReviewedGames();
-    }, [reviewList]);
+    }, [reviewList, reviewDeleted]);
+
+    const handleDelete = async (reviewId: number) => {
+      try {
+          console.log("deleting review", reviewId)
+          await axios.delete(`${process.env.BACKEND_URL}/review/delete/${reviewId}`);
+
+          // increment the reviewDeleted state to trigger a re-fetch of the reviews
+          setReviewDeleted(reviewDeleted => reviewDeleted + 1);
+      } catch (error) {
+          console.error("Failed to delete review", error);
+      }
+    };
     
     return(
         <div style = {{display: 'flex', justifyContent: 'space-between'}}>
@@ -100,14 +116,14 @@ const ProfilePage = () => {
                         </div>
                     </Card> 
             </div>
-            <div style={{ flex: 2 }}>
+            <div style={{ flex: 2, margin: '0 40px' }}>
             <div>
                 {reviewList && reviewList.length > 0 ? (
                     <div style={{ display: 'grid', gap: '20px' }}>
                     {reviewList.map((review, index) => (
                         <div key={index}>
                         <Card size="2">
-                          <Box >
+                          <Flex style={{ marginBottom: '10px', flexDirection:'column' }}>
                             <a href={`/reviews/${review.game_id}`}>
                               <Flex align="center" style={{ marginBottom: '10px',}}>
                                   <Avatar
@@ -122,12 +138,21 @@ const ProfilePage = () => {
                                   </Text>
                               </Flex>
                             </a>
-                            <ProgressBar initialValue={0} finalValue={review.rating}/> 
-                            <Text as="div" size="2" color="gray" style={{ marginBottom: '10px', marginTop: '20px'}}>
+                            <div style={{ width: '50%' }}>
+                              <ProgressBar initialValue={0} finalValue={review.rating} /> 
+                            </div>
+                            <Text as="div" size="2" color="gray" style={{marginTop: '10px'}}>
                                 {review.review} 
                             </Text>
+                       
+                              <button onClick={() => handleDelete(review.id)} style={{ marginLeft: 'auto', cursor: 'pointer', background: 'none', border: 'none' }}>
+                                  <RiDeleteBin5Fill />
+                              </button>
+
+                    
+
                               
-                          </Box>
+                          </Flex>
                 
                             {/* </div> */}
                         </Card>

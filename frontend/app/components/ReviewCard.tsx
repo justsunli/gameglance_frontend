@@ -69,10 +69,10 @@ const ReviewCard = ({ game_id }: ReviewCardProps) => {
                     {userReview}
                   </Text>
                 </Flex>
-                  <ProgressBar initialValue={0} finalValue={post.rating} />
-                  {/* <Text as="div" size="2" color="gray">
-                    {post.rating} 
-                  </Text> */}
+                  <div style={{ width: '60%' }}>
+                    <ProgressBar initialValue={0} finalValue={post.rating} />
+                  </div>
+                
                   <Text as="div" size="2" color="gray" style={{ marginBottom: '20px', marginTop: '20px'}}>
                     {post.review} 
                   </Text>
