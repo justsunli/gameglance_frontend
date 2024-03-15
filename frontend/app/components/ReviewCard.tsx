@@ -33,6 +33,8 @@ const ReviewCard = ({ game_id }: ReviewCardProps) => {
         const response = await axios.get(`${process.env.BACKEND_URL}/game/getGameReviews/${game_id}`);
         const gameReviews: Review[] = response.data;
         setReviews(gameReviews);
+  
+        
 
         // query for username using user_id from each review
         const userReviewsPromises = gameReviews.map(review =>
@@ -51,9 +53,7 @@ const ReviewCard = ({ game_id }: ReviewCardProps) => {
     fetchGameReviews();
   }, [game_id]);
 
-  if (!reviews) {
-    return <div>Loading...</div>;
-  }
+
   return (
     <div style={{ display: 'grid', gap:'20px' }}>
       {reviews.map((post, index) => {

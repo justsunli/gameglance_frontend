@@ -27,4 +27,4 @@ const RatingSlider = React.forwardRef<
 ))
 RatingSlider.displayName = SliderPrimitive.Root.displayName
 
-export { RatingSlider }
+export default RatingSlider;

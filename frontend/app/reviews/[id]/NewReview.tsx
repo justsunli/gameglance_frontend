@@ -4,9 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, TextArea, Callout } from '@radix-ui/themes';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { Ratings } from '../../components/Ratings';
-import { RatingSlider } from '@/app/components/RatingSlider';
+import RatingSlider from '../../components/RatingSlider';
 import { auth } from '../../components/firebase';
 
 interface ReviewForm{
@@ -20,9 +18,6 @@ interface GameID {
   game_id: number | undefined;
 }
 
-// interface NewReviewProps extends GameID {
-//   onNewReview: () => void;
-// }
 
 const NewReview = (props: GameID) => {
 

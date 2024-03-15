@@ -2,8 +2,9 @@
 const nextConfig = {
     output: 'export',
     env: {
-        BACKEND_URL: "http://3.142.199.84:8080",
+        BACKEND_URL: "https://3.142.199.84.nip.io",
     }
 }
 
 module.exports = nextConfig
+
